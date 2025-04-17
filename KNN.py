@@ -57,5 +57,38 @@ plt.xlabel("K değeri")
 plt.ylabel("Doğruluk")
 plt.xticks(k_values)
 plt.grid(True)
+
+
+
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.neighbors import KNeighborsRegressor
+
+x=np.sort(5*np.random.rand(40,1),axis=0) #uniform
+y=np.sin(x).ravel() #target
+
+#plt.scatter(x,y)
+
+y[::5]+= 1*(0.5-np.random.rand(8))
+
+#plt.scatter(x,y)
+
+t = np.linspace(0, 5, 500).reshape(-1, 1)  # ✅ Bu şekilde olmalı
+
+
+for i,weight in enumerate["uniform","distance"]:
     
+    knn=KNeighborsRegressor(n_neighbors=5,weights=weight)
+    knn.fit(x,y)
+    y_pred=knn.predict(t)
+    plt.subplot(2,1,i+1)
+    plt.scatter(x,y,color="green",label="data")
+    plt.plot(t,y_pred,color="blue",label="prediction")
+    plt.axis("tight")
+    plt.legend()
+    plt.title("KNN REGRESSOR WEİGHT={}".format(weight))
+    
+plt.tight_layout()
+plt.show()
+ 
     
